@@ -1,0 +1,5 @@
+[client]
+database = NAME_HERE
+user = USER_HERE
+password = PASSWORD_HERE
+default-character-set = utf8
