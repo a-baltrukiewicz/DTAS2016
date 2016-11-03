@@ -13,10 +13,11 @@ namespace backend.HTTPServer.RequestHandlers
             : base(".*", true) //przyjmuje każde możliwe URL 
         { }
 
-        public override string HandleRequest(HttpListenerRequest request)
+        public override object HandleRequest(HttpListenerRequest request)
         {
             //@todo: implement
-            return "<HTML>404 " + request.Url.ToString() + "</HTML>";
+            string str = "<HTML>404 " + request.Url.ToString() + "</HTML>";
+            return str;
         }
     }
 }

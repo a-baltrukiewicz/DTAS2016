@@ -1,13 +1,21 @@
 ﻿using backend.HTTPServer.RequestHandlers;
+using Newtonsoft.Json;
 
 namespace backend.HTTPServer
 {
     /* Klasa służąca do tworzenia instancji HTTPServera. */
     class ServerBuilder
     {
+        static JsonSerializerSettings CreateJSONSettings()
+        {
+            JsonSerializerSettings settings = new JsonSerializerSettings();
+            settings.Formatting = Formatting.Indented;
+            return settings;
+        }
+
         public static HTTPServer CreateServer(uint port)
         {
-            HTTPServer server = new HTTPServer(port);
+            HTTPServer server = new HTTPServer(port, CreateJSONSettings());
 
             server.AddRequestHandler(new PollsRequestHandler());
 

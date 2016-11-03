@@ -1,33 +1,35 @@
 ﻿using System.Net;
 using System.Collections.Generic;
 using backend.HTTPServer.RequestHandlers;
+using Newtonsoft.Json;
 
 namespace backend.HTTPServer
 {
     class HTTPServer
     {
 
-        public HTTPServer(uint port)
+        public HTTPServer(uint port, JsonSerializerSettings jsonSettings)
         {
-            _port = port;
-            _listener = new HttpListener();
+            this.port = port;
+            listener = new HttpListener();
 
             _requestHandlers = new List<AbstractRequestHandler>();
 
             var uri = "http://localhost:" + port.ToString() + "/";
-            _listener.Prefixes.Add(uri);
+            listener.Prefixes.Add(uri);
+            this.jsonSettings = jsonSettings;
         }
 
         public void Start()
         {
-            _listener.Start();
-            System.Console.WriteLine("Listening at " + _port.ToString() + ". Ctrl+C to stop.");
+            listener.Start();
+            System.Console.WriteLine("Listening at " + port.ToString() + ". Ctrl+C to stop.");
             for (; ;) ManageRequests();
         }
         
         private void ManageRequests()
         {
-            HttpListenerContext context = _listener.GetContext();
+            HttpListenerContext context = listener.GetContext();
             HttpListenerRequest request = context.Request;
             HttpListenerResponse response = context.Response;
 
@@ -38,13 +40,12 @@ namespace backend.HTTPServer
         //metoda dopasowuje request do odpowiednego requestHandlera
         private string MatchRequest(HttpListenerRequest request)
         {
-            string response = "<HTML>Unexpected error, run for you life!</HTML>";
             foreach (var requestHandler in _requestHandlers)
             {
                 if (requestHandler.Match(request.Url.ToString()))
-                    return requestHandler.HandleRequest(request);
+                    return JsonConvert.SerializeObject(requestHandler.HandleRequest(request), jsonSettings);
             }
-            return response;
+            return "<HTML>Unexpected error, run for you life!</HTML>";
         }
 
         private void SendResponse(HttpListenerResponse response, string responseString)
@@ -62,8 +63,9 @@ namespace backend.HTTPServer
         }
 
         List<AbstractRequestHandler> _requestHandlers;
-        private HttpListener _listener;
-        private uint _port;
+        private HttpListener listener;
+        private uint port;
+        private JsonSerializerSettings jsonSettings;
 
 
     }

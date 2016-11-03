@@ -6,7 +6,7 @@ namespace backend.HTTPServer.RequestHandlers
      */
     abstract class AbstractRequestHandler
     {
-        //specialCase służy do wypadków szczególnych w deseń defaultowego
+        //specialCase służy do wypadków szczególnych w deseń defaultowego request handlera
         public AbstractRequestHandler(string responsibilityURL, bool specialCase = false)
         {
             if (specialCase)
@@ -15,11 +15,12 @@ namespace backend.HTTPServer.RequestHandlers
                 _responsibilityURL = @"\/" + responsibilityURL;
         }
        
-
-        abstract public string HandleRequest(System.Net.HttpListenerRequest request);
+        //powinien zwracać obiekt, który zostanie sparsowany do JSONa
+        abstract public object HandleRequest(System.Net.HttpListenerRequest request);
 
         public bool Match(string url)
         {
+            //Regex łapiący URLe
             Regex rx = new Regex(@"^http[s]{0,1}:\/\/[a-zA-Z]*:\d+" + _responsibilityURL + @"(\/.*$|$)"
                                 , RegexOptions.Compiled | RegexOptions.IgnoreCase);
             return rx.IsMatch(url);
