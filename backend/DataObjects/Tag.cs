@@ -5,9 +5,11 @@ namespace backend.DataObjects
 {
     class Tag
     {
+        public uint id { get; set; }
         public string name { get; set; }
         //wewnętrzne id do przyśpieszenia wyszukiwania
-        public uint id { get; set; }
+        
+        public Tag() { }
 
         public Tag(string name, uint id)
         {

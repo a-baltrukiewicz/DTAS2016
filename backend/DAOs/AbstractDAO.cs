@@ -17,6 +17,14 @@ namespace backend.DAOs
 
         }
 
+        protected List<T> ReceiveFromDatabase(string sql)
+        {
+            ConnectToSQLServer();
+            string json = ExecuteSQLCommand(sql);
+            DisconnectFromSQLServer();
+            return Tokenize(json);
+        }
+
         protected IEnumerable<Dictionary<string, object>> Serialize(SqlDataReader reader)
         {
             var results = new List<Dictionary<string, object>>();

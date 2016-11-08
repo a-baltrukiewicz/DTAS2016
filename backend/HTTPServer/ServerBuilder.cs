@@ -19,6 +19,7 @@ namespace backend.HTTPServer
 
             server.AddRequestHandler(new PollsRequestHandler());
             server.AddRequestHandler(new UsersRequestHandler());
+            server.AddRequestHandler(new TagsRequestHandler());
             server.AddRequestHandler(new DefaultRequestHandler()); //zawsze powinien być ostatni!
 
             return server;

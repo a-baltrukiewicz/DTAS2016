@@ -15,11 +15,7 @@ namespace backend.DAOs
 
         public List<User> GetAllUsers()
         {
-            base.ConnectToSQLServer();
-            string json = base.ExecuteSQLCommand("select * from users");
-            base.DisconnectFromSQLServer();
-
-            return Tokenize(json);
+            return ReceiveFromDatabase("select * from users");
         }
 
         protected override List<User> Tokenize(string json)
