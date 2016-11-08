@@ -14,32 +14,18 @@ namespace backend.HTTPServer.RequestHandlers
 
     class UsersRequestHandler : AbstractRequestHandler
     {
-        public UsersRequestHandler() : base("users") { }
+        public UsersRequestHandler() : base("users")
+        {
+            usersDAO = new DAOs.UsersDAO();
+        }
 
         public override object HandleRequest(HttpListenerRequest request)
         {
-
-            SQLCommunication SQLconn = new SQLCommunication();
-            SQLconn.connectToSQLServer();
-            string json = SQLconn.executeSQLCommand("SELECT * FROM USERS");
-            SQLconn.disconnectFromSQLServer();
-            JArray token = JArray.Parse(json);
-            List<User> users = new List<User>();
-
-            for (int i = 0; i < token.Count(); i++)
-            {
-                User newUser = new User();
-                newUser.id = (int)token[i]["ID"];
-                newUser.firstName = token[i]["firstName"].ToString();
-                newUser.lastName = token[i]["lastName"].ToString();
-                newUser.email = token[i]["email"].ToString();
-                newUser.password = token[i]["password"].ToString();
-                newUser.sex = token[i]["sex"].ToString();
-                users.Add(newUser);
-            }
-
+            List<User> users = usersDAO.GetAllUsers();
             return new UsersContainer(users);
         }
+
+        private DAOs.UsersDAO usersDAO;
 
         private class UsersContainer
         {

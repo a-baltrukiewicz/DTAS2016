@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\UsersDAO.cs" />
     <Compile Include="DataObjects\Answer.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\Poll.cs" />
@@ -69,7 +70,7 @@
     <Compile Include="HTTPServer\HTTPServer.cs" />
     <Compile Include="HTTPServer\RequestHandlers\AbstractRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\UsersRequestHandler.cs" />
-    <Compile Include="HTTPServer\SQLCommunication.cs" />
+    <Compile Include="DAOs\BaseDAO.cs" />
     <Compile Include="HTTPServer\RequestHandlers\DefaultRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\PollsRequestHandler.cs" />
     <Compile Include="HTTPServer\ServerBuilder.cs" />
@@ -92,6 +93,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
