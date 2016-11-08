@@ -63,10 +63,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataObjects\Answer.cs" />
+    <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\Poll.cs" />
     <Compile Include="DataObjects\Tag.cs" />
     <Compile Include="HTTPServer\HTTPServer.cs" />
     <Compile Include="HTTPServer\RequestHandlers\AbstractRequestHandler.cs" />
+    <Compile Include="HTTPServer\RequestHandlers\UsersRequestHandler.cs" />
+    <Compile Include="HTTPServer\SQLCommunication.cs" />
     <Compile Include="HTTPServer\RequestHandlers\DefaultRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\PollsRequestHandler.cs" />
     <Compile Include="HTTPServer\ServerBuilder.cs" />

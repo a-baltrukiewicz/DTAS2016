@@ -18,7 +18,7 @@ namespace backend.HTTPServer
             HTTPServer server = new HTTPServer(port, CreateJSONSettings());
 
             server.AddRequestHandler(new PollsRequestHandler());
-
+            server.AddRequestHandler(new UsersRequestHandler());
             server.AddRequestHandler(new DefaultRequestHandler()); //zawsze powinien być ostatni!
 
             return server;
