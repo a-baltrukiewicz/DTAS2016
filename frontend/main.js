@@ -10,7 +10,7 @@ functionSend=function(){
 	var objectDataString = JSON.stringify(objectData);
 	$.ajax({
 				type: "POST",
-				url: "https://localhost:8080/polls",
+				url: "https://localhost:8080/users",
 				dataType: "json",
 				data: {
 					o: objectDataString
