@@ -7,7 +7,6 @@ namespace backend.DataObjects
     {
         public uint id { get; set; }
         public string name { get; set; }
-        //wewnętrzne id do przyśpieszenia wyszukiwania
         
         public Tag() { }
 

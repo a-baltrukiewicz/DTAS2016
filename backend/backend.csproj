@@ -62,9 +62,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOs\AnswersDAO.cs" />
+    <Compile Include="DAOs\QuestionsDAO.cs" />
     <Compile Include="DAOs\TagsDAO.cs" />
     <Compile Include="DAOs\UsersDAO.cs" />
     <Compile Include="DataObjects\Answer.cs" />
+    <Compile Include="DataObjects\Question.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\Poll.cs" />
     <Compile Include="DataObjects\Tag.cs" />

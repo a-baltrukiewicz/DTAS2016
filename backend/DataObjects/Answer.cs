@@ -13,21 +13,26 @@ namespace backend.DataObjects
         //ilość głosów na odpowiedź
         public uint voteQuantity { get; set; }
 
-        public Answer(string name, uint voteQuantity)
+        public Answer(/*uint id,*/ string name, uint voteQuantity)
         {
+            //this.id = id;
             this.name = name;
             this.voteQuantity = voteQuantity;
         }
 
-        public static bool operator ==(Answer lhs, Answer rhs)
+        public Answer()
         {
-            return lhs.voteQuantity == rhs.voteQuantity;
+        }
+
+        /*public static bool operator ==(Answer lhs, Answer rhs)
+        {
+            return lhs.id == rhs.id;
         }
 
         public static bool operator !=(Answer lhs, Answer rhs)
         {
             return !(lhs == rhs);
-        }
+        }*/
 
         public static bool operator >(Answer lhs, Answer rhs)
         {

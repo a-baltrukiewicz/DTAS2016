@@ -9,16 +9,15 @@ namespace backend.DataObjects
 {
     class Poll
     {
-        public Poll(List<Answer> answers, List<Tag> tags, string question)
+        public Poll(List<Question> question, List<Tag> tags)
         {
-            this.answers = answers;
-            this.tags = tags;
             this.question = question;
+            this.tags = tags;
         }
 
         public Poll()
         {
-            answers = new List<Answer>();
+            question = new List<Question>();
             tags = new List<Tag>();
         }
 
@@ -28,8 +27,7 @@ namespace backend.DataObjects
         }
 
         
-        public List<Answer> answers { get; set; }
+        public List<Question> question { get; set; }
         public List<Tag> tags { get; set; }
-        public string question { get; set; }
     }
 }
