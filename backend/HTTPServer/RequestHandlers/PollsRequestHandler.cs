@@ -16,7 +16,7 @@ namespace backend.HTTPServer.RequestHandlers
 
         public override object HandleRequest(HttpListenerRequest request)
         {
-            return new DAOs.AnswersDAO().GetAllFilledAnswersToQuestion(3);
+            return new DAOs.QuestionsDAO().GetFilledQuestion(4);
         }
 
         private class PollsContainer

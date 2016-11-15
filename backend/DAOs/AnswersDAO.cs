@@ -18,7 +18,7 @@ namespace backend.DAOs
             for (int i = 0; i < token.Count(); i++)
             {
                 Answer answer = new Answer();
-                answer.name = token[i]["text"].ToString();
+                answer.name = token[i]["answer"].ToString();
                 answer.voteQuantity = (uint)token[i]["quantity"];
                 answers.Add(answer);
             }
@@ -27,7 +27,7 @@ namespace backend.DAOs
 
         public List<Answer> GetAllFilledAnswersToQuestion(uint questionID)
         {
-            return ReceiveFromDatabase("select f.answer, COUNT(f.answer) as quantity from FilledFields f group by answer");
+            return ReceiveFromDatabase("select f.answer, COUNT(f.answer) as quantity from FilledFields f where questionID = " + questionID+ " group by answer");
         }
     }
 }

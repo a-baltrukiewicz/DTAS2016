@@ -28,7 +28,7 @@ namespace backend.DAOs
             return questions;
         }
 
-        public Question GetQuestion(uint questionID)
+        public Question GetFilledQuestion(uint questionID)
         {//@TODO POPRAWI
             return base.ReceiveFromDatabase("select * from Questions where id = " + questionID)[0];
         }
