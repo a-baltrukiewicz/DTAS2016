@@ -32,6 +32,7 @@ namespace backend.HTTPServer
             HttpListenerContext context = listener.GetContext();
             HttpListenerRequest request = context.Request;
             HttpListenerResponse response = context.Response;
+            response.AddHeader("Access-Control-Allow-Origin", "*");
 
             string responseStr = MatchRequest(request);
             SendResponse(response, responseStr);
