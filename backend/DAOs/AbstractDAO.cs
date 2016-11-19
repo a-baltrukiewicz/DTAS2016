@@ -22,6 +22,7 @@ namespace backend.DAOs
             ConnectToSQLServer();
             string json = ExecuteSQLCommand(sql);
             DisconnectFromSQLServer();
+            if (json == null) return null;
             return Tokenize(json);
         }
 
@@ -80,7 +81,6 @@ namespace backend.DAOs
         {
             this.conn.Close();
         }
-
 
     }
 }

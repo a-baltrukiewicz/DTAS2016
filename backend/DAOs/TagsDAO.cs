@@ -30,7 +30,7 @@ namespace backend.DAOs
         
         public List<Tag> GetPollTagsList(uint pollID)
         {
-            return ReceiveFromDatabase("select * from tags where  " + pollID); //@todo: poprawienie SQL
+            return ReceiveFromDatabase("select t.* from tags t, tagsTable tt where tt.tagID = t.ID and tt.pollID = " + pollID);
         }
 
         public List<Tag> GetAllTags()

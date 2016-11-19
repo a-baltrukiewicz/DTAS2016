@@ -1,5 +1,5 @@
 ﻿using backend.DataObjects;
-
+using backend.UtilityClasses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +14,33 @@ namespace backend.HTTPServer.RequestHandlers
     {
         public PollsRequestHandler() : base("polls") { }
 
-        public override object HandleRequest(HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request)
         {
-            return new DAOs.QuestionsDAO().GetFilledQuestion(4);
+            throw new NotImplementedException();
+        }
+
+        public override object HandleGET(System.Net.HttpListenerRequest request)
+        {
+            ObjectsFactories.PollsFactory factory = new ObjectsFactories.PollsFactory();
+            RESTCollectionElementID collectionElementID = GetCollectionElementID(request);
+            if (collectionElementID.IsCollection())
+            {
+                return factory.CreateFilledPolls().WithTags().GetPolls();
+            }
+            else
+            {
+                return factory.CreateFilledPoll(collectionElementID.elementNumber).WithAllFilled().GetPoll();
+            }
+        }
+
+        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        {
+            throw new NotImplementedException();
         }
 
         private class PollsContainer

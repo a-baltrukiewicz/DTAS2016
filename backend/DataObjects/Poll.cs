@@ -9,15 +9,18 @@ namespace backend.DataObjects
 {
     class Poll
     {
-        public Poll(List<Question> question, List<Tag> tags)
+        public Poll(uint id, string name, string description, List<Question> questions, List<Tag> tags)
         {
-            this.question = question;
+            this.id = id;
+            this.name = name;
+            this.description = description;
+            this.questions = questions;
             this.tags = tags;
         }
 
         public Poll()
         {
-            question = new List<Question>();
+            questions = new List<Question>();
             tags = new List<Tag>();
         }
 
@@ -26,8 +29,11 @@ namespace backend.DataObjects
             return tags.Contains(tag);
         }
 
-        
-        public List<Question> question { get; set; }
+
+        public uint id { get; set; }
+        public string name { get; set; }
+        public string description { get; set; }
+        public List<Question> questions { get; set; }
         public List<Tag> tags { get; set; }
     }
 }
