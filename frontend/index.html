@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+	<meta name="viewport" content="width=devie-width, initial-sacle=1" />
+	<meta charset="utf-8">
+	<title>JSON and AJAX</title>
+	<script>
+	function pokazUserow(){
+	var ourRequest = new XMLHttpRequest();
+	ourRequest.open('GET','http://localhost:8080/users');
+	ourRequest.onload=function(){
+	x1='{  "users": [ { "id": 1, "firstName": "Michał", "lastName": "Głazik", "email": "michal.glazik@mail.com", "password": "123456", "sex": "M" }, { "id": 2, "firstName": "Kamil", "lastName": "Hliwa", "email": "elas@mail.com", "password": "password", "sex": "M" }, { "id": 3, "firstName": "Jan", "lastName": "Bachleda", "email": "janbach@a.com", "password": "pswd", "sex": "M" } ] }';
+	//var y=JSON.parse(ourRequest.responseText);
+	//var y=JSON.parse(x);
+	var y=JSON.parse(ourRequest.responseText);
+	/*var hateemel="";
+	for(i=0;i<y.length; i++){
+	hateemel+='<p>'+y[i].id + '. ' +y[i].firstName+" "+ y[i].lastName +" "+y[i].email+" "+y[i].password+" "+y[i].sex+'</p>';
+	}
+	document.getElementById('uzytkownicy').innerHTML=hateemel;
+	*/
+	wypisz(y);
+	}
+	ourRequest.send();
+}
+
+	function wypisz(ciag){
+	var hateemel="[ID] [FIRST NAME] [LAST NAME] [E-MAIL] [PASSWORD] [SEX]";
+	for(i=0;i<ciag.length; i++){
+	hateemel+='<p>'+ciag[i].id + '. ' +ciag[i].firstName+" "+ ciag[i].lastName +" "+ciag[i].email+" "+ciag[i].password+" "+ciag[i].sex+'</p>';
+	}
+	document.getElementById('uzytkownicy').innerHTML=hateemel;
+	}
+</script>
+</head>
+<body>
+	<h1>Ankiety - użytkownicy</h1>
+	<input type="submit" value="pokaż użytkowników" onclick="pokazUserow()">
+	<div id="uzytkownicy"></div>
+	
+</body>
+
+</html>
