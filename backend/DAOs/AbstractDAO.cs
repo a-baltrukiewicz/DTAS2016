@@ -49,7 +49,8 @@ namespace backend.DAOs
         {
             try
             {
-                this.conn.ConnectionString = "Server=MICHAL;Database=TAS;Trusted_Connection=true";
+                this.conn.ConnectionString = "Server=" + ServerDefines.serverName 
+                    + ";Database=" + ServerDefines.databaseName +";Trusted_Connection=true";
                 this.conn.Open();
             }
             catch (SqlException er)

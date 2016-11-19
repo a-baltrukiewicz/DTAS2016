@@ -1,4 +1,5 @@
-
+# Defines files, need to be changed according to project settings.
+ServerDefines.cs
 # Created by https://www.gitignore.io/api/visualstudio,csharp
 
 ### Csharp ###
