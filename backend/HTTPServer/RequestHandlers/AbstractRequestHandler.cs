@@ -19,15 +19,24 @@ namespace backend.HTTPServer.RequestHandlers
         //powinien zwracać obiekt, który zostanie sparsowany do JSONa
         public object HandleRequest(System.Net.HttpListenerRequest request)
         {
-            this.request = request;
-            if (request.HttpMethod == "GET")
-                return HandleGET(request);
-            else if (request.HttpMethod == "POST")
-                return HandlePOST(request);
-            else if (request.HttpMethod == "PUT")
-                return HandlePUT(request);
-            else if (request.HttpMethod == "DELETE")
-                return HandleDELETE(request);
+            try
+            {
+                if (request.HttpMethod == "GET")
+                    return HandleGET(request);
+                else if (request.HttpMethod == "POST")
+                    return HandlePOST(request);
+                else if (request.HttpMethod == "PUT")
+                    return HandlePUT(request);
+                else if (request.HttpMethod == "DELETE")
+                    return HandleDELETE(request);
+            }
+            catch (System.Exception ex)
+            {
+                string error = "Error: " + ex.TargetSite.ToString() + " at " + ex.Source.ToString() + ". ";
+                error += "URL: " + request.Url;
+                error += ". Please inform site administrator.";
+                return error;
+            }
             string baseResponse = "Invalid method";
             return baseResponse;
         }
@@ -58,6 +67,5 @@ namespace backend.HTTPServer.RequestHandlers
         //Dla "example oznacza to, że handler odpowiada za requesty w deseń http://localhost:8080/example, http://localhost:8080/example/5,
         //http://localhost:8080/example/5/example2 itd.
         string _responsibilityURL;
-        protected System.Net.HttpListenerRequest request;
     }
 }
