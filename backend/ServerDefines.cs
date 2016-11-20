@@ -8,7 +8,7 @@ namespace backend
 {
     class ServerDefines
     {
-        public const string serverName = "SERVER_NAME";
-        public const string databaseName = "DATABASE_NAME";
+        public const string serverName = "MICHAL";
+        public const string databaseName = "TAS";
     }
 }

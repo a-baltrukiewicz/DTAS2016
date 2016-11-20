@@ -35,12 +35,14 @@ namespace backend.HTTPServer.RequestHandlers
         public override object HandleGET(System.Net.HttpListenerRequest request)
         {
             List<User> users = usersDAO.GetAllUsers();
-            return new UsersContainer(users);
+            return users;
         }
 
         public override object HandlePOST(System.Net.HttpListenerRequest request)
         {
-            throw new NotImplementedException();
+            System.Console.Write(GetRequestData(request));
+            System.Console.WriteLine();
+            return null;
         }
 
         public override object HandlePUT(System.Net.HttpListenerRequest request)
@@ -51,6 +53,23 @@ namespace backend.HTTPServer.RequestHandlers
         public override object HandleDELETE(System.Net.HttpListenerRequest request)
         {
             throw new NotImplementedException();
+        }
+
+        public static string GetRequestData(HttpListenerRequest request)
+        {
+            if (!request.HasEntityBody)
+            {
+                Console.WriteLine("No client data was sent with the request.");
+                return ("No data");
+            }
+            System.IO.Stream body = request.InputStream;
+            System.Text.Encoding encoding = request.ContentEncoding;
+            System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
+            string read = reader.ReadToEnd();
+            body.Close();
+            reader.Close();
+            return read;
+            // If you are finished with the request, it should be closed also.
         }
     }
 }
