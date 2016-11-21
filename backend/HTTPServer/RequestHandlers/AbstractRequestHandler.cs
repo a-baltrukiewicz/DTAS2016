@@ -40,6 +40,26 @@ namespace backend.HTTPServer.RequestHandlers
             string baseResponse = "Invalid method";
             return baseResponse;
         }
+
+        public static string GetRequestData(System.Net.HttpListenerRequest request)
+        {
+            if (!request.HasEntityBody)
+            {
+                System.Console.WriteLine("No client data was sent with the request.");
+                return ("");
+            }
+            System.IO.Stream body = request.InputStream;
+            System.Text.Encoding encoding = request.ContentEncoding;
+            System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
+            string read = reader.ReadToEnd();
+            body.Close();
+            reader.Close();
+            return read;
+            // If you are finished with the request, it should be closed also.
+        }
+
+
+
         protected RESTCollectionElementID GetCollectionElementID(System.Net.HttpListenerRequest request)
         {
             Regex regex = new Regex(@"\d+");

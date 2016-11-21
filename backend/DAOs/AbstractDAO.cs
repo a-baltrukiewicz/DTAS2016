@@ -26,6 +26,15 @@ namespace backend.DAOs
             return Tokenize(json);
         }
 
+        protected string SendToDatabase(string sql)
+        {
+            ConnectToSQLServer();
+            string result = ExecuteSQLCommand(sql);
+            DisconnectFromSQLServer();
+            if (result == null) return null;
+            return result;
+        }
+
         protected IEnumerable<Dictionary<string, object>> Serialize(SqlDataReader reader)
         {
             var results = new List<Dictionary<string, object>>();
