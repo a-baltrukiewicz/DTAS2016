@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Panel administracyjny</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link rel="stylesheet" href="style.css" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body link="white" vlink="white" alink="white">
+	
+	<div id="container">
+	
+		<div id="logo">
+			Ankiety
+		</div>
+		
+		<div id="menu">
+			<a href="index.html"><div class="option">Nasze Ankiety</div></a>
+			<a href="oankietach.html"><div class="option">Co to jest ankieta?</div></a>
+			<a href="celbadan.html"><div class="option">Cel badań</div></a>
+			<a href="onas.html"><div class="option">O nas</div></a>
+			<a href="narzedzia.html"><div class="option">Panel administracyjny</div></a>
+			<div style="clear:both;"></div>
+		</div>
+		
+		
+		
+		<div id="content">
+		
+		<span class="bigtitle">Użytkownicy</span>
+		<div class="dottedline"></div>
+		
+		<h3>Lista użytkowników</h3>
+	<input type="submit" value="pokaż użytkowników" onclick="pokazUserow()">
+	<div id="uzytkownicy"></div>
+<br><br><br>	
+		
+		<h3>Dodaj użytkownika</h3>
+			<form id="test" action="#" method="post">
+    <div class="form-group">
+        <label for="name">First name</label>
+        <input class="form-control" type="text" name="firstName" id="firstName" />
+    </div>
+	<div class="form-group">
+        <label for="name">Last name</label>
+        <input class="form-control" type="text" name="lastName" id="lastName" />
+    </div>
+    <div class="form-group">
+    	<label for="select">Sex</label>
+    	<select name="sex" class="form-control">
+			<option value="M">Mezczyzna</option>
+    		<option value="K">Kobieta</option>
+    	</select>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="text" name="email" id="email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" />
+    </div>
+    <p>
+        <input type="submit" value="Send" class="btn btn-primary btn-block" />
+    </p>
+</form>	
+<script type="text/javascript" src="script.js"></script>
+<pre id="output"></pre>
+			
+			<div class="dottedline"></div>
+			
+			
+		</div>	
+		
+		<div id="footer">
+			Projek przygotowywany na zajęcia TAS 2016 &copy; Wszelkie prawa zastrzeżone
+		</div>
+	
+	</div>
+	
+</body>
+</html>
