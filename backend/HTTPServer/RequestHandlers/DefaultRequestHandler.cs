@@ -14,12 +14,27 @@ namespace backend.HTTPServer.RequestHandlers
         {
         }
 
-        public override object HandleRequest(HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request)
         {
             return HTMLResponse(request);
         }
 
-        private string HTMLResponse(HttpListenerRequest request)
+        public override object HandleGET(System.Net.HttpListenerRequest request)
+        {
+            return HTMLResponse(request);
+        }
+
+        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        {
+            return HTMLResponse(request);
+        }
+
+        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        {
+            return HTMLResponse(request);
+        }
+
+        private string HTMLResponse(System.Net.HttpListenerRequest request)
         {
             return @"<HTML>404 Page " + request.Url.ToString() + @" not found.</HTML>";
         }

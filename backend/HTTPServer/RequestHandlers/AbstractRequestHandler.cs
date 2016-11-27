@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using backend.UtilityClasses;
+using System.Text.RegularExpressions;
 
 namespace backend.HTTPServer.RequestHandlers
 {
@@ -16,8 +17,64 @@ namespace backend.HTTPServer.RequestHandlers
         }
        
         //powinien zwracać obiekt, który zostanie sparsowany do JSONa
-        abstract public object HandleRequest(System.Net.HttpListenerRequest request);
+        public object HandleRequest(System.Net.HttpListenerRequest request)
+        {
+            try
+            {
+                if (request.HttpMethod == "GET")
+                    return HandleGET(request);
+                else if (request.HttpMethod == "POST")
+                    return HandlePOST(request);
+                else if (request.HttpMethod == "PUT")
+                    return HandlePUT(request);
+                else if (request.HttpMethod == "DELETE")
+                    return HandleDELETE(request);
+            }
+            catch (System.Exception ex)
+            {
+                string error = "Error: " + ex.TargetSite.ToString() + " at " + ex.Source.ToString() + ". ";
+                error += "URL: " + request.Url;
+                error += ". Please inform site administrator.";
+                return error;
+            }
+            string baseResponse = "Invalid method";
+            return baseResponse;
+        }
 
+        public static string GetRequestData(System.Net.HttpListenerRequest request)
+        {
+            if (!request.HasEntityBody)
+            {
+                System.Console.WriteLine("No client data was sent with the request.");
+                return ("");
+            }
+            System.IO.Stream body = request.InputStream;
+            System.Text.Encoding encoding = request.ContentEncoding;
+            System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
+            string read = reader.ReadToEnd();
+            body.Close();
+            reader.Close();
+            return read;
+            // If you are finished with the request, it should be closed also.
+        }
+
+
+
+        protected RESTCollectionElementID GetCollectionElementID(System.Net.HttpListenerRequest request)
+        {
+            Regex regex = new Regex(@"\d+");
+            Match match = regex.Match(request.RawUrl);
+            if (match.Success)
+                return new RESTCollectionElementID((uint)System.Int32.Parse(match.Value));
+            else
+                return new RESTCollectionElementID();
+        }
+
+
+        abstract public object HandleGET(System.Net.HttpListenerRequest request);
+        abstract public object HandlePOST(System.Net.HttpListenerRequest request);
+        abstract public object HandlePUT(System.Net.HttpListenerRequest request);
+        abstract public object HandleDELETE(System.Net.HttpListenerRequest request);
         public bool Match(string url)
         {
             //Regex łapiący URLe

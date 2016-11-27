@@ -18,12 +18,7 @@ namespace backend.HTTPServer.RequestHandlers
         {
             usersDAO = new DAOs.UsersDAO();
         }
-
-        public override object HandleRequest(HttpListenerRequest request)
-        {
-            List<User> users = usersDAO.GetAllUsers();
-            return new UsersContainer(users);
-        }
+        
 
         private DAOs.UsersDAO usersDAO;
 
@@ -37,5 +32,26 @@ namespace backend.HTTPServer.RequestHandlers
             public List<User> users { get; set; }
         }
 
+        public override object HandleGET(System.Net.HttpListenerRequest request)
+        {
+            List<User> users = usersDAO.GetAllUsers();
+            return users;
+        }
+
+        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        {
+            string json = GetRequestData(request);
+            return usersDAO.SaveUsers(json);
+        }
+
+        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override object HandleDELETE(System.Net.HttpListenerRequest request)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

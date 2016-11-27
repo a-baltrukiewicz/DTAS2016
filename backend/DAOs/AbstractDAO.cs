@@ -22,7 +22,17 @@ namespace backend.DAOs
             ConnectToSQLServer();
             string json = ExecuteSQLCommand(sql);
             DisconnectFromSQLServer();
+            if (json == null) return null;
             return Tokenize(json);
+        }
+
+        protected string SendToDatabase(string sql)
+        {
+            ConnectToSQLServer();
+            string result = ExecuteSQLCommand(sql);
+            DisconnectFromSQLServer();
+            if (result == null) return null;
+            return result;
         }
 
         protected IEnumerable<Dictionary<string, object>> Serialize(SqlDataReader reader)
@@ -49,7 +59,8 @@ namespace backend.DAOs
         {
             try
             {
-                this.conn.ConnectionString = "Server=MICHAL;Database=TAS;Trusted_Connection=true";
+                this.conn.ConnectionString = "Server=" + ServerDefines.serverName 
+                    + ";Database=" + ServerDefines.databaseName +";Trusted_Connection=true";
                 this.conn.Open();
             }
             catch (SqlException er)
@@ -79,7 +90,6 @@ namespace backend.DAOs
         {
             this.conn.Close();
         }
-
 
     }
 }
