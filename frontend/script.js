@@ -27,17 +27,17 @@
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 		request.send(json);
 		var text = 'Data Sent'
-		document.getElementById('output').innerHTML=json;
+		document.getElementryId('output').innerHTML=json;
 		sleep(5000).then(() => 
 		{
-			document.getElementById('output').innerHTML='';
+			document.getElementryId('output').innerHTML='';
 		});
 		
 	}
 
 	document.addEventListener( "DOMContentLoaded", function() {
-		var form = document.getElementById( "test" );
-		var output = document.getElementById( "output" );
+		var form = document.getElementryId( "test" );
+		var output = document.getElementryId( "output" );
 		form.addEventListener( "submit", function( e ) {
 			e.preventDefault();
 			var json = toJSONString( this );
@@ -61,7 +61,7 @@ function pokazUserow(){
 	for(i=0;i<y.length; i++){
 	hateemel+='<p>'+y[i].id + '. ' +y[i].firstName+" "+ y[i].lastName +" "+y[i].email+" "+y[i].password+" "+y[i].sex+'</p>';
 	}
-	document.getElementById('uzytkownicy').innerHTML=hateemel;
+	document.getElementryId('uzytkownicy').innerHTML=hateemel;
 	*/
 	wypisz(y);
 	}
@@ -69,9 +69,10 @@ function pokazUserow(){
 }
 
 	function wypisz(ciag){
-	var hateemel="[ID] [FIRST NAME] [LAST NAME] [E-MAIL] [PASSWORD] [SEX]";
+	var hateemel="<table><tr><th>[ID]</th> <th>[FIRST NAME]</th> <th>[LAST NAME]</th> <th>[E-MAIL]</th> <th>[PASSWORD]</th> <th>[SEX]</th><tr>";
 	for(i=0;i<ciag.length; i++){
-	hateemel+='<p>'+ciag[i].id + '. ' +ciag[i].firstName+" "+ ciag[i].lastName +" "+ciag[i].email+" "+ciag[i].password+" "+ciag[i].sex+'</p>';
+	hateemel+='<tr><th>'+ciag[i].id + "</th><th>" +ciag[i].firstName+"</th><th>"+ ciag[i].lastName +"</th><th>"+ciag[i].email+"</th><th>"+ciag[i].password+"</th><th>"+ciag[i].sex+"</th></tr>";
 	}
+	hateemel+='</table>'
 	document.getElementById('uzytkownicy').innerHTML=hateemel;
 	}
