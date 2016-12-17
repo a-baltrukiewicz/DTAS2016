@@ -27,17 +27,17 @@
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 		request.send(json);
 		var text = 'Data Sent'
-		document.getElementryId('output').innerHTML=json;
+		document.getElementById('output').innerHTML=json;
 		sleep(5000).then(() => 
 		{
-			document.getElementryId('output').innerHTML='';
+			document.getElementById('output').innerHTML='';
 		});
 		
 	}
 
 	document.addEventListener( "DOMContentLoaded", function() {
-		var form = document.getElementryId( "test" );
-		var output = document.getElementryId( "output" );
+		var form = document.getElementById( "test" );
+		var output = document.getElementById( "output" );
 		form.addEventListener( "submit", function( e ) {
 			e.preventDefault();
 			var json = toJSONString( this );
@@ -61,7 +61,7 @@ function pokazUserow(){
 	for(i=0;i<y.length; i++){
 	hateemel+='<p>'+y[i].id + '. ' +y[i].firstName+" "+ y[i].lastName +" "+y[i].email+" "+y[i].password+" "+y[i].sex+'</p>';
 	}
-	document.getElementryId('uzytkownicy').innerHTML=hateemel;
+	document.getElementById('uzytkownicy').innerHTML=hateemel;
 	*/
 	wypisz(y);
 	}
