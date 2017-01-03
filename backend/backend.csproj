@@ -80,11 +80,13 @@
     <Compile Include="HTTPServer\RequestHandlers\DefaultRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\PollsRequestHandler.cs" />
     <Compile Include="HTTPServer\ServerBuilder.cs" />
+    <Compile Include="ObjectsFactories\HTTPResponseFactory.cs" />
     <Compile Include="ObjectsFactories\PollsFactory.cs" />
     <Compile Include="ObjectsFactories\QuestionsFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDefines.cs" />
+    <Compile Include="UtilityClasses\HTTPResponse.cs" />
     <Compile Include="UtilityClasses\RESTCollectionElementID.cs" />
   </ItemGroup>
   <ItemGroup>
