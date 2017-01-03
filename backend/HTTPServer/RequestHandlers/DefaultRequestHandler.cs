@@ -1,4 +1,5 @@
-﻿using System;
+﻿using backend.UtilityClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -14,27 +15,31 @@ namespace backend.HTTPServer.RequestHandlers
         {
         }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
-            return HTMLResponse(request);
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotFound();
+            return HTMLResponse(request, ref response);
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request)
+        public override object HandleGET(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
-            return HTMLResponse(request);
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotFound();
+            return HTMLResponse(request, ref response);
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        public override object HandlePOST(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
-            return HTMLResponse(request);
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotFound();
+            return HTMLResponse(request, ref response);
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        public override object HandlePUT(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
-            return HTMLResponse(request);
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotFound();
+            return HTMLResponse(request, ref response);
         }
 
-        private string HTMLResponse(System.Net.HttpListenerRequest request)
+        private string HTMLResponse(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
             return @"<HTML>404 Page " + request.Url.ToString() + @" not found.</HTML>";
         }

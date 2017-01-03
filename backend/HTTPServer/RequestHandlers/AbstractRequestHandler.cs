@@ -1,4 +1,5 @@
 ﻿using backend.UtilityClasses;
+using System.Net;
 using System.Text.RegularExpressions;
 
 namespace backend.HTTPServer.RequestHandlers
@@ -17,18 +18,18 @@ namespace backend.HTTPServer.RequestHandlers
         }
        
         //powinien zwracać obiekt, który zostanie sparsowany do JSONa
-        public object HandleRequest(System.Net.HttpListenerRequest request)
+        public object HandleRequest(HttpListenerRequest request, ref HTTPResponse response)
         {
             try
             {
                 if (request.HttpMethod == "GET")
-                    return HandleGET(request);
+                    return HandleGET(request, ref response);
                 else if (request.HttpMethod == "POST")
-                    return HandlePOST(request);
+                    return HandlePOST(request, ref response);
                 else if (request.HttpMethod == "PUT")
-                    return HandlePUT(request);
+                    return HandlePUT(request, ref response);
                 else if (request.HttpMethod == "DELETE")
-                    return HandleDELETE(request);
+                    return HandleDELETE(request, ref response);
             }
             catch (System.Exception ex)
             {
@@ -41,7 +42,7 @@ namespace backend.HTTPServer.RequestHandlers
             return baseResponse;
         }
 
-        public static string GetRequestData(System.Net.HttpListenerRequest request)
+        public static string GetRequestData(HttpListenerRequest request)
         {
             if (!request.HasEntityBody)
             {
@@ -60,7 +61,7 @@ namespace backend.HTTPServer.RequestHandlers
 
 
 
-        protected RESTCollectionElementID GetCollectionElementID(System.Net.HttpListenerRequest request)
+        protected RESTCollectionElementID GetCollectionElementID(HttpListenerRequest request)
         {
             Regex regex = new Regex(@"\d+");
             Match match = regex.Match(request.RawUrl);
@@ -71,10 +72,10 @@ namespace backend.HTTPServer.RequestHandlers
         }
 
 
-        abstract public object HandleGET(System.Net.HttpListenerRequest request);
-        abstract public object HandlePOST(System.Net.HttpListenerRequest request);
-        abstract public object HandlePUT(System.Net.HttpListenerRequest request);
-        abstract public object HandleDELETE(System.Net.HttpListenerRequest request);
+        abstract public object HandleGET(HttpListenerRequest request, ref HTTPResponse response);
+        abstract public object HandlePOST(HttpListenerRequest request, ref HTTPResponse response);
+        abstract public object HandlePUT(HttpListenerRequest request, ref HTTPResponse response);
+        abstract public object HandleDELETE(HttpListenerRequest request, ref HTTPResponse response);
         public bool Match(string url)
         {
             //Regex łapiący URLe

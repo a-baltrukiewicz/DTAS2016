@@ -14,33 +14,46 @@ namespace backend.HTTPServer.RequestHandlers
     {
         public PollsRequestHandler() : base("polls") { }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request)
+        public override object HandleGET(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
             ObjectsFactories.PollsFactory factory = new ObjectsFactories.PollsFactory();
             RESTCollectionElementID collectionElementID = GetCollectionElementID(request);
-            if (collectionElementID.IsCollection())
+            try
             {
-                return factory.CreateFilledPolls().WithTags().GetPolls();
+                if (collectionElementID.IsCollection())
+                {
+                    response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeOK();
+                    return factory.CreateFilledPolls().WithTags().GetPolls();
+                }
+                else
+                {
+                    response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeOK();
+                    return factory.CreateFilledPoll(collectionElementID.elementNumber).WithAllFilled().GetPoll();
+                }
             }
-            else
+            catch (Exception e)
             {
-                return factory.CreateFilledPoll(collectionElementID.elementNumber).WithAllFilled().GetPoll();
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
             }
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
         private class PollsContainer

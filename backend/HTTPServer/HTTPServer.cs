@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using backend.HTTPServer.RequestHandlers;
 using Newtonsoft.Json;
+using backend.UtilityClasses;
 
 namespace backend.HTTPServer
 {
@@ -34,17 +35,19 @@ namespace backend.HTTPServer
             HttpListenerResponse response = context.Response;
             response.AddHeader("Access-Control-Allow-Origin", "*");
 
-            string responseStr = MatchRequest(request);
+            HTTPResponse httpResponse = null;
+            string responseStr = MatchRequest(request, ref httpResponse);
+            HTTPResponse.AddHTTPResponseToResponse(httpResponse, ref response);
             SendResponse(response, responseStr);
         }
 
         //metoda dopasowuje request do odpowiednego requestHandlera
-        private string MatchRequest(HttpListenerRequest request)
+        private string MatchRequest(HttpListenerRequest request, ref HTTPResponse response)
         {
             foreach (var requestHandler in _requestHandlers)
             {
                 if (requestHandler.Match(request.Url.ToString()))
-                    return JsonConvert.SerializeObject(requestHandler.HandleRequest(request), jsonSettings);
+                    return JsonConvert.SerializeObject(requestHandler.HandleRequest(request, ref response), jsonSettings);
             }
             return "<HTML>Unexpected error, run for you life!</HTML>";
         }

@@ -32,26 +32,36 @@ namespace backend.HTTPServer.RequestHandlers
             public List<Tag> tags { get; set; }
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request)
+        public override object HandleGET(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            //List<Tag> tags = tagsDAO.GetAllTags();
-            //return new TagsContainer(tags);
-            return tagsDAO.GetAllTags();
+            try
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeOK();
+                return tagsDAO.GetAllTags();
+            }
+            catch (Exception e)
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
+            }
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
     }
 }

@@ -32,26 +32,46 @@ namespace backend.HTTPServer.RequestHandlers
             public List<User> users { get; set; }
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request)
+        public override object HandleGET(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            List<User> users = usersDAO.GetAllUsers();
-            return users;
+            try
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeOK();
+                List<User> users = usersDAO.GetAllUsers();
+                return users;
+            }
+            catch (Exception e)
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
+            }
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request)
+        public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            string json = GetRequestData(request);
-            return usersDAO.SaveUsers(json);
+            try
+            {
+                string json = GetRequestData(request);
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeCreated();
+                return usersDAO.SaveUsers(json);
+            }
+            catch (Exception e)
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
+            }
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request)
+        public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            throw new NotImplementedException();
+            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
+            return response;
         }
     }
 }
