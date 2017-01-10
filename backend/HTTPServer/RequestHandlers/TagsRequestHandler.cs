@@ -48,8 +48,17 @@ namespace backend.HTTPServer.RequestHandlers
 
         public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
         {
-            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
-            return response;
+            try
+            {
+                string json = GetRequestData(request);
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeCreated();
+                return tagsDAO.SaveTags(json);
+            }
+            catch (Exception e)
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
+            }
         }
 
         public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)

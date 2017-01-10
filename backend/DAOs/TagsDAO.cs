@@ -13,10 +13,23 @@ namespace backend.DAOs
         public TagsDAO() : base()
         {   }
 
+        public string SaveTags(string json)
+        {
+            json = json.Substring(12);
+            json = json.Remove(json.Length - 2);
+            bool x = Validate(json);
+            if (x)
+            {
+                string comm = "insert into Tags values ('" + json + "')";
+                return SendToDatabase(comm);
+            }
+            else return "error";
+        }
+
         protected override List<Tag> Tokenize(string json)
         {
-            JArray token = JArray.Parse(json);
             List<Tag> tags = new List<Tag>();
+            JArray token = JArray.Parse(json);
 
             for (int i = 0; i < token.Count(); i++)
             {
@@ -36,6 +49,26 @@ namespace backend.DAOs
         public List<Tag> GetAllTags()
         {
             return ReceiveFromDatabase("select * from tags");
+        }
+
+        public bool Validate(string json)
+        {
+            int x = 0;
+            for(int i=0;i<json.Length;i++)
+            {
+                if (json.StartsWith("delete") || json.StartsWith("insert") || json.StartsWith("drop") || json.StartsWith("update"))
+                {
+                    x++;
+                }
+                if (json.StartsWith("DELETE") || json.StartsWith("INSERT") || json.StartsWith("DROP") || json.StartsWith("UPDATE"))
+                {
+                    x++;
+                }
+                json = json.Substring(1);
+            }
+            
+            if (x == 0) return true;
+            else return false;
         }
     }
 }

@@ -32,7 +32,6 @@
 		<div id="content">
 		
 		<span class="bigtitle">Użytkownicy</span>
-		<div class="dottedline"></div>
 		
 		<h3>Lista użytkowników</h3>
 	<input type="submit" value="pokaż użytkowników" onclick="pokazUserow()">
@@ -68,10 +67,33 @@
         <input type="submit" value="Send" class="btn btn-primary btn-block" />
     </p>
 </form>	
+
 <script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="tags.js"></script>
+
 <pre id="output"></pre>
 			
 			<div class="dottedline"></div>
+			<span class="bigtitle">Tagi</span>
+			
+			<br><br><br>
+			<h3>Dodaj tag</h3>
+			<form id="tagg" action="#" method="post">
+    <div class="form-group">
+        <label for="name">nazwa tagu</label>
+        <input class="form-control" type="text" name="tagText" id="tagText" />
+    </div>
+	<p>
+        <input type="submit" value="Wyślij" class="btn btn-primary btn-block" />
+    </p>
+</form>	
+<pre id="out"></pre>
+
+	<h3>Lista tagów</h3>
+			<input type="submit" value="pokaż tagi" onclick="pokazTagi()">
+			<div id="tagi"></div>
+<br><br><br>	
 			
 			
 		</div>	
