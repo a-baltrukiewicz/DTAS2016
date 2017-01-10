@@ -39,9 +39,9 @@ namespace backend.HTTPServer.RequestHandlers
             return HTMLResponse(request, ref response);
         }
 
-        private string HTMLResponse(System.Net.HttpListenerRequest request, ref HTTPResponse response)
+        private object HTMLResponse(System.Net.HttpListenerRequest request, ref HTTPResponse response)
         {
-            return @"<HTML>404 Page " + request.Url.ToString() + @" not found.</HTML>";
+            return ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotFound();
         }
     }
 }

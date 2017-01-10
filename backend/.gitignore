@@ -402,3 +402,6 @@ __pycache__/
 
 ### VisualStudio Patch ###
 build/
+
+#plik ServerDefines, który dla ka¿dego komputera mo¿e przecie¿ byæ inny
+ServerDefines.cs

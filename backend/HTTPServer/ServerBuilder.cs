@@ -20,6 +20,7 @@ namespace backend.HTTPServer
             /* od najbardziej szczególnych do najbardziej ogólnych */
             server.AddRequestHandler(new PollsRequestHandler());
             server.AddRequestHandler(new UsersRequestHandler());
+            server.AddRequestHandler(new LoginRequestHandler());
             server.AddRequestHandler(new TagsRequestHandler());
             server.AddRequestHandler(new DefaultRequestHandler()); //zawsze powinien być ostatni!
 

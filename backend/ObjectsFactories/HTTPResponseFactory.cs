@@ -28,6 +28,10 @@ namespace backend.ObjectsFactories
         {
             return new HTTPResponse("Created", 201);
         }
+        public HTTPResponse CreateCodeNoContent()
+        {
+            return new HTTPResponse("No content", 204);
+        }
         //4XX
         public HTTPResponse CreateCodeBadRequest()
         {

@@ -37,7 +37,7 @@ namespace backend.HTTPServer
 
             HTTPResponse httpResponse = null;
             string responseStr = MatchRequest(request, ref httpResponse);
-            HTTPResponse.AddHTTPResponseToResponse(httpResponse, ref response);
+            //HTTPResponse.AddHTTPResponseToResponse(httpResponse, ref response);
             SendResponse(response, responseStr);
         }
 

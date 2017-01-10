@@ -1,21 +1,3 @@
-function pokazTagi() {
-	var ourRequest = new XMLHttpRequest();
-	ourRequest.open('GET', 'http://localhost:8080/tags');
-	ourRequest.onload = function() {
-		var y = JSON.parse(ourRequest.responseText);
-		wypiszT(y);
-	}
-	ourRequest.send();
-}
-
-function wypiszT(ciag) {
-	var hateemel = "<table><tr><th>[ID]</th> <th>[NAME]</th><tr>";
-	for (i = 0; i < ciag.length; i++) {
-		hateemel += '<tr><th>' + ciag[i].id + "</th><th>" + ciag[i].name + "</th></tr>";
-	}
-	hateemel += '</table>'
-	document.getElementById('tagi').innerHTML = hateemel;
-}
 (function() {
 	function toJSONString(form) {
 		var obj = {};
@@ -37,7 +19,7 @@ function wypiszT(ciag) {
 
 	function sendPost(json) {
 		var request = new XMLHttpRequest(json);
-		request.open('POST', 'http://localhost:8080/tags', true);
+		request.open('POST', 'http://localhost:8080/login', true);
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 		request.send(json);
 		var text = 'Data Sent'
@@ -47,8 +29,8 @@ function wypiszT(ciag) {
 		});
 	}
 	document.addEventListener("DOMContentLoaded", function() {
-		var form = document.getElementById("tagg");
-		var output = document.getElementById("out");
+		var form = document.getElementById("loginForm");
+		var output = document.getElementById("output");
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			var json = toJSONString(this);
@@ -56,3 +38,17 @@ function wypiszT(ciag) {
 		}, false);
 	});
 })();
+
+ourRequest.onload = function() {
+		var y = JSON.parse(ourRequest.responseText);
+		wypisz(y);
+	}
+
+function wypisz(ciag) {
+	var hateemel = "<table><tr><th>[ID]</th> <th>[FIRST NAME]</th> <th>[LAST NAME]</th> <th>[E-MAIL]</th> <th>[SEX]</th><tr>";
+	for (i = 0; i < ciag.length; i++) {
+		hateemel += '<tr><th>' + ciag[i].id + "</th><th>" + ciag[i].firstName + "</th><th>" + ciag[i].lastName + "</th><th>" + ciag[i].email + "</th><th>" + ciag[i].sex + "</th></tr>";
+	}
+	hateemel += '</table>'
+	document.getElementById('uzytkownicy').innerHTML = hateemel;
+}
