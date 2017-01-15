@@ -17,14 +17,19 @@
 		return new Promise((resolve) => setTimeout(resolve, time));
 	}
 
-	function sendPost(json) {
+	function sendPostandSaveCookie(json) {
 		var request = new XMLHttpRequest(json);
 		request.open('POST', 'http://localhost:8080/login', true);
 		request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
 		request.send(json);
-		var text = 'Data Sent'
+		var text = 'Data Sent';
 		document.getElementById('output').innerHTML = json;
-		sleep(5000).then(() => {
+		request.onload=function(){
+			var y=JSON.parse(request.responseText);
+			setCookie('token', y, 1);
+			alert(getCookie('token'));
+		}
+		sleep(10000).then(() => {
 			document.getElementById('output').innerHTML = '';
 		});
 	}
@@ -34,21 +39,39 @@
 		form.addEventListener("submit", function(e) {
 			e.preventDefault();
 			var json = toJSONString(this);
-			sendPost(json);
+			sendPostandSaveCookie(json);
 		}, false);
 	});
 })();
 
-ourRequest.onload = function() {
-		var y = JSON.parse(ourRequest.responseText);
-		wypisz(y);
-	}
-
 function wypisz(ciag) {
-	var hateemel = "<table><tr><th>[ID]</th> <th>[FIRST NAME]</th> <th>[LAST NAME]</th> <th>[E-MAIL]</th> <th>[SEX]</th><tr>";
-	for (i = 0; i < ciag.length; i++) {
-		hateemel += '<tr><th>' + ciag[i].id + "</th><th>" + ciag[i].firstName + "</th><th>" + ciag[i].lastName + "</th><th>" + ciag[i].email + "</th><th>" + ciag[i].sex + "</th></tr>";
-	}
-	hateemel += '</table>'
-	document.getElementById('uzytkownicy').innerHTML = hateemel;
+	hateemel = ''
+	hateemel += ciag
+	document.getElementById('output').innerHTML = hateemel;
+}
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+function eraseCookie(name) {
+    createCookie(name,"",-1);
 }

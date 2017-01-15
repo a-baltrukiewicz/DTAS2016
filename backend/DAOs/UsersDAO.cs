@@ -62,7 +62,15 @@ namespace backend.DAOs
         {
             JToken token = JToken.Parse(json);
             string pass1 = SendToDatabase("select password from users where email = '" + token["email"].ToString() + "' and deleted = 0");
-            JToken pass2 = JToken.Parse(pass1);
+            JToken pass2;
+            try
+            {
+                pass2 = JToken.Parse(pass1);
+            }
+            catch
+            {
+                return ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeUnauthorized();
+            }
             string pass3 = pass2[0]["password"].ToString();
             string tokenPass = token["password"].ToString();
             string encryptedPassword = sha256(tokenPass);

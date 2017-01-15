@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>Ankiety</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	
+	<link rel="stylesheet" href="stylem.css" type="text/css" />
+	<link href='http://fonts.googleapis.com/css?family=Lato:400,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body link="white" vlink="white" alink="white">
+	
+	<div id="container">
+	
+		<div id="logo">
+			Ankiety
+		</div>
+		<a href="narzedzia.html">Powrót do wersji standardowej</a>
+		<div id="menu">
+		
+			<a href="indexm.html"><div class="option">Nasze Ankiety</div></a>
+			<a href="oankietachm.html"><div class="option">Co to jest ankieta?</div></a>
+			<a href="celbadanm.html"><div class="option">Cel badań</div></a>
+			<a href="onasm.html"><div class="option">O nas</div></a>
+			<a href="narzedziam.html"><div class="option">Panel administracyjny</div></a>
+			<div style="clear:both;"></div>
+		</div>
+		
+		
+		
+		<div id="content">
+		
+		<span class="bigtitle">Użytkownicy</span>
+		
+		<h3>Lista użytkowników</h3>
+	<input type="submit" value="pokaż użytkowników" onclick="pokazUserow()">
+	<div id="uzytkownicy"></div>
+<br><br><br>	
+		
+		<h3>Dodaj użytkownika</h3>
+			<form id="test" action="#" method="post">
+    <div class="form-group">
+        <label for="name">First name</label>
+        <input class="form-control" type="text" name="firstName" id="firstName" />
+    </div>
+	<div class="form-group">
+        <label for="name">Last name</label>
+        <input class="form-control" type="text" name="lastName" id="lastName" />
+    </div>
+    <div class="form-group">
+    	<label for="select">Sex</label>
+    	<select name="sex" class="form-control">
+			<option value="M">Mezczyzna</option>
+    		<option value="K">Kobieta</option>
+    	</select>
+    </div>
+    <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" type="text" name="email" id="email" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" type="password" name="password" id="password" />
+    </div>
+    <p>
+        <input type="submit" value="Send" class="btn btn-primary btn-block" />
+    </p>
+</form>	
+
+<script type="text/javascript" src="users.js"></script>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="tags.js"></script>
+
+<pre id="output"></pre>
+			
+			<div class="dottedline"></div>
+			<span class="bigtitle">Tagi</span>
+			
+			<br><br><br>
+			<h3>Dodaj tag</h3>
+			
+	<form id="tagg" action="#" method="post">
+    <div class="form-group">
+		<label for="name">nazwa tagu</label>
+		<input class="form-control" type="text" name="tagText" id="tagText" />
+    </div>
+	<p>
+        <input type="submit" value="Wyślij" class="btn btn-primary btn-block" />
+    </p>
+	</form>	
+	
+<pre id="out"></pre>
+
+	<h3>Lista tagów</h3>
+			<input type="submit" value="pokaż tagi" onclick="pokazTagi()">
+			<div id="tagi"></div>
+<br><br><br>	
+			
+			
+		</div>	
+		
+		<div id="footer">
+			Projekt przygotowywany na zajęcia TAS 2016 &copy; Wszelkie prawa zastrzeżone
+		</div>
+	
+	</div>
+	
+</body>
+</html>
