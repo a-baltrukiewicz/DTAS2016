@@ -32,7 +32,7 @@ namespace backend.HTTPServer.RequestHandlers
             public List<User> users { get; set; }
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandleGET(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             try
             {
@@ -47,7 +47,7 @@ namespace backend.HTTPServer.RequestHandlers
             }
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandlePOST(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             try
             {
@@ -62,13 +62,13 @@ namespace backend.HTTPServer.RequestHandlers
             }
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandlePUT(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
             return response;
         }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
             return response;

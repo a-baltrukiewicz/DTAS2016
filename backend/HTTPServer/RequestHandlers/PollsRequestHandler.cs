@@ -14,13 +14,13 @@ namespace backend.HTTPServer.RequestHandlers
     {
         public PollsRequestHandler() : base("polls") { }
 
-        public override object HandleDELETE(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandleDELETE(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
             return response;
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandleGET(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             ObjectsFactories.PollsFactory factory = new ObjectsFactories.PollsFactory();
             RESTCollectionElementID collectionElementID = GetCollectionElementID(request);
@@ -44,13 +44,13 @@ namespace backend.HTTPServer.RequestHandlers
             }
         }
 
-        public override object HandlePOST(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandlePOST(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
             return response;
         }
 
-        public override object HandlePUT(System.Net.HttpListenerRequest request,ref  UtilityClasses.HTTPResponse response)
+        public override object HandlePUT(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
             response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
             return response;
