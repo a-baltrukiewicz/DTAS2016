@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using backend.HTTPServer.RequestHandlers;
 using Newtonsoft.Json;
 using backend.UtilityClasses;
+using backend.ObjectsFactories;
 
 namespace backend.HTTPServer
 {
@@ -49,6 +50,7 @@ namespace backend.HTTPServer
                 if (requestHandler.Match(request.Url.ToString()))
                     return JsonConvert.SerializeObject(requestHandler.HandleRequest(request, ref response), jsonSettings);
             }
+            response = HTTPResponseFactory.GetObject().CreateCodeNotFound();
             return "<HTML>Unexpected error, run for you life!</HTML>";
         }
 

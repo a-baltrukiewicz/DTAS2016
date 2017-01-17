@@ -32,7 +32,7 @@ namespace backend.HTTPServer.RequestHandlers
             public List<User> users { get; set; }
         }
 
-        public override object HandleGET(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
+        public override object HandleGET(System.Net.HttpListenerRequest request, ref  UtilityClasses.HTTPResponse response)
         {
             try
             {

@@ -23,7 +23,7 @@ namespace backend.DAOs
                 string comm = "insert into Tags values ('" + json + "')";
                 return SendToDatabase(comm);
             }
-            else return "error";
+            else throw new Exception();
         }
 
         protected override List<Tag> Tokenize(string json)
