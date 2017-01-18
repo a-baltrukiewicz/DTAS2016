@@ -1,7 +1,9 @@
 --Micha³ G³azik
 --baza TAS
---v0.3.0
+--v0.4.1
 --
+--v0.4.1: U³atwienie usuwania Userów
+--v0.4.0: Uciek³a, zniknê³a w odmêtach Git-a :(
 --v0.3.0: Poprawiono tagi.
 --v0.2.0: Testowanie bazy, poprawki b³êdów.
 --v0.1.0: Nietestowana jeszcze baza, a dok³adniej jej szkielet.
@@ -26,7 +28,8 @@ create table Users
 	lastName	varchar(100)	not null,
 	email		varchar(100),
 	password	varchar(100),
-	sex			varchar(10)
+	sex			varchar(10),
+	deleted		int
 )
 
 create table Polls
@@ -88,7 +91,7 @@ create table FilledFields
 
 --Testowe zainicjowanie bazy
 
-insert into Users values ( 'Micha³', 'G³azik', 'michal.glazik@mail.com', '123456','M')
+insert into Users values ( 'Micha³', 'G³azik', 'michal.glazik@mail.com', '123456','M', 0)
 insert into Polls values ('Testowa ankieta', 'Brak', getdate(), NULL)
 insert into Questions values (1, 'Wyjaœnij sens pisania w Javie.'),
 	(1, 'W jakim jêzyku programujesz najczêœciej?')
@@ -97,7 +100,7 @@ insert into FilledPolls values (1, 1)
 insert into FilledFields values (1, 1, 'Pisanie w Javie nie ma sensu XD') ,
 	(1, 2, 'Ostatnio najczêœciej w Pythonie 3.')
 
-insert into Users values ('Kamil', 'Hliwa', 'elas@mail.com' ,'password','M')
+insert into Users values ('Kamil', 'Hliwa', 'elas@mail.com' ,'password','M', 0)
 insert into Polls values ('Ankieta z zamknietymi pytaniami', 'Brak', getdate(), NULL)
 insert into Questions values (0, 'Co wybierasz na obiad?'),
 	(0, 'Która z tych gier zapad³a Ci w pamiêæ najbardziej?')
@@ -105,6 +108,6 @@ insert into QuestionTable values (2, 3), (2, 4)
 insert into FilledPolls values (2, 2)
 insert into AnswersTable values (3, 'Ziemniaki'), (3, 'Ry¿'), (3, 'Kaszê'), (4, 'WiedŸmin'),  (4, 'Half-Life'), (4, 'Call of Duty')
 insert into FilledFields values (2, 3, 'Ziemniaki') , (2, 4, 'Wiedzmin')
-insert into Users values ('Jan', 'Bachleda', 'janbach@a.com', 'pswd', 'M')
+insert into Users values ('Jan', 'Bachleda', 'janbach@a.com', 'pswd', 'M', 0)
 insert into Tags values ('ksiazki'), ('jedzenie'), ('gry'), ('trudna_ankieta')
 insert into TagsTable values (1, 4), (2, 3)
