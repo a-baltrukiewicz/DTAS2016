@@ -1,4 +1,5 @@
-﻿using backend.UtilityClasses;
+﻿using backend.ObjectsFactories;
+using backend.UtilityClasses;
 using System.Net;
 using System.Text.RegularExpressions;
 
@@ -33,10 +34,8 @@ namespace backend.HTTPServer.RequestHandlers
             }
             catch (System.Exception ex)
             {
-                string error = "Error: " + ex.TargetSite.ToString() + " at " + ex.Source.ToString() + ". ";
-                error += "URL: " + request.Url;
-                error += ". Please inform site administrator.";
-                return error;
+                response = HTTPResponseFactory.GetObject().CreateCodeBadRequest();
+                return response;
             }
             string baseResponse = "Invalid method";
             return baseResponse;

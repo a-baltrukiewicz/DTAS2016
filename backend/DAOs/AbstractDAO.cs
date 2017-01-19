@@ -28,11 +28,23 @@ namespace backend.DAOs
 
         protected string SendToDatabase(string sql)
         {
+            if (CheckForSQLInjection(sql))
+                throw new Exception();
             ConnectToSQLServer();
             string result = ExecuteSQLCommand(sql);
             DisconnectFromSQLServer();
             if (result == null) return null;
             return result;
+        }
+        private static readonly List<string> sqlInjectionCommands = new List<string>{"select", "delete", "drop", "update", "insert" };
+        private bool CheckForSQLInjection(string sql)
+        {
+            foreach (string command in sqlInjectionCommands)
+            {
+                if (sql.ToLower().Contains(command))
+                    return true;
+            }
+            return false;
         }
 
         protected IEnumerable<Dictionary<string, object>> Serialize(SqlDataReader reader)
