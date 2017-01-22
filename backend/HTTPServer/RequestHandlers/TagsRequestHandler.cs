@@ -52,6 +52,7 @@ namespace backend.HTTPServer.RequestHandlers
             {
                 string json = GetRequestData(request);
                 response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeCreated();
+
                 return tagsDAO.SaveTags(json);
             }
             catch (Exception e)

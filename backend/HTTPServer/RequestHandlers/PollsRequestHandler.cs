@@ -1,5 +1,6 @@
 ﻿using backend.DataObjects;
 using backend.UtilityClasses;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,8 +47,19 @@ namespace backend.HTTPServer.RequestHandlers
 
         public override object HandlePOST(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)
         {
-            response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeNotImplemented();
-            return response;
+            try
+            {
+                string json = GetRequestData(request);
+                Poll poll = JsonConvert.DeserializeObject<Poll>(json);
+
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeCreated();
+                return UserFilledAnswersSaver.GetObject().SaveFilledPoll(poll);
+            }
+            catch (Exception e)
+            {
+                response = ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeInternalServerError();
+                return response;
+            }
         }
 
         public override object HandlePUT(System.Net.HttpListenerRequest request, ref UtilityClasses.HTTPResponse response)

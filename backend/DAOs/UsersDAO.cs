@@ -40,6 +40,8 @@ namespace backend.DAOs
 
         public string SaveUsers(string json)
         {
+            if (CheckForSQLInjection(json))
+                throw new Exception();
             List<User> users = Tokenize(json);
             //dodanie hashowania haseł oraz obsługi "cichego usunięcia"
             string comm = "insert into Users values ";

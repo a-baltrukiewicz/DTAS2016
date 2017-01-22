@@ -29,5 +29,17 @@ namespace backend.DAOs
         {
             return ReceiveFromDatabase("select f.answer, COUNT(f.answer) as quantity from FilledFields f where questionID = " + questionID+ " group by answer");
         }
+
+        public string SaveAllFilledAnswersToQuestion(uint fillID, uint questionID, List<Answer> answers)
+        {
+            string comm = "INSERT INTO FilledFields (fillID, questionID, answer) VALUES";
+            foreach (Answer answer in answers)
+            {
+                comm += "\n(" + + fillID + ", " + questionID + ", '" + answer.name +"'),";
+            }
+            comm = comm.Remove(comm.Length - 1); //nadmiarowy przecinek
+
+            return SendToDatabase(comm);
+        }
     }
 }

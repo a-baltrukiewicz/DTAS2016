@@ -54,6 +54,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -65,6 +66,7 @@
     <Compile Include="DAOs\FilledAnswersDAO.cs" />
     <Compile Include="DAOs\FilledPollsDAO.cs" />
     <Compile Include="DAOs\FilledQuestionsDAO.cs" />
+    <Compile Include="DAOs\NewFilledPollDAO.cs" />
     <Compile Include="DAOs\TagsDAO.cs" />
     <Compile Include="DAOs\UsersDAO.cs" />
     <Compile Include="DataObjects\Answer.cs" />
@@ -89,6 +91,7 @@
     <Compile Include="ServerDefines.cs" />
     <Compile Include="UtilityClasses\HTTPResponse.cs" />
     <Compile Include="UtilityClasses\RESTCollectionElementID.cs" />
+    <Compile Include="UtilityClasses\UserFilledAnswersSaver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -106,7 +109,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

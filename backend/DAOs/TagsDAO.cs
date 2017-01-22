@@ -15,6 +15,8 @@ namespace backend.DAOs
 
         public string SaveTags(string json)
         {
+            if (CheckForSQLInjection(json))
+                throw new Exception();
             json = json.Substring(12);
             json = json.Remove(json.Length - 2);
             string comm = "insert into Tags values ('" + json + "')";

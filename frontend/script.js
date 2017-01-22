@@ -127,9 +127,9 @@ function pokazUserow(){
 }
 
 	function wypisz(ciag){
-	var hateemel="<table><tr><th>[ID]</th> <th>[FIRST NAME]</th> <th>[LAST NAME]</th> <th>[E-MAIL]</th> <th>[PASSWORD]</th> <th>[SEX]</th><tr>";
+	var hateemel="<table><tr><th>[ID]</th> <th>[FIRST NAME]</th> <th>[LAST NAME]</th> <th>[E-MAIL]</th>  <th>[SEX]</th><tr>";
 	for(i=0;i<ciag.length; i++){
-	hateemel+='<tr><th>'+ciag[i].id + "</th><th>" +ciag[i].firstName+"</th><th>"+ ciag[i].lastName +"</th><th>"+ciag[i].email+"</th><th>"+ciag[i].password+"</th><th>"+ciag[i].sex+"</th></tr>";
+	hateemel+='<tr><th>'+ciag[i].id + "</th><th>" +ciag[i].firstName+"</th><th>"+ ciag[i].lastName +"</th><th>"+ciag[i].email+"</th><th>"+ciag[i].sex+"</th></tr>";
 	}
 	hateemel+='</table>'
 	document.getElementById('uzytkownicy').innerHTML=hateemel;

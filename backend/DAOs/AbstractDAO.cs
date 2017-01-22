@@ -28,8 +28,6 @@ namespace backend.DAOs
 
         protected string SendToDatabase(string sql)
         {
-            if (CheckForSQLInjection(sql))
-                throw new Exception();
             ConnectToSQLServer();
             string result = ExecuteSQLCommand(sql);
             DisconnectFromSQLServer();
@@ -37,7 +35,7 @@ namespace backend.DAOs
             return result;
         }
         private static readonly List<string> sqlInjectionCommands = new List<string>{"select", "delete", "drop", "update", "insert" };
-        private bool CheckForSQLInjection(string sql)
+        protected bool CheckForSQLInjection(string sql)
         {
             foreach (string command in sqlInjectionCommands)
             {
