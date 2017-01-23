@@ -1,0 +1,173 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+    <meta charset="utf-8" />
+    <title>Ankiety</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,900&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body link="blue" vlink="white" alink="white">
+
+<div id="container">
+
+    <div id="logo">
+        Ankiety
+    </div>
+    <a href="indexm.html">Wersja mobilna</a>
+    <div id="menu">
+        <a href="index.html"><div class="option">Nasze Ankiety</div></a>
+        <a href="oankietach.html"><div class="option">Co to jest ankieta?</div></a>
+        <a href="celbadan.html"><div class="option">Cel badañ</div></a>
+        <a href="onas.html"><div class="option">O nas</div></a>
+        <a href="narzedzia.html"><div class="option">Panel administracyjny</div></a>
+        <a href="login.html"><div class="option">Panel logowania</div></a>
+        <div style="clear:both;"></div>
+    </div>
+
+
+
+    <div id="content">
+        <span class="bigtitle">Ankieta</span>
+        <script type="text/javascript">
+		
+			var parsed;
+			
+			function getParameterByName(name, url) {
+				if (!url) {
+				  url = window.location.href;
+				}
+				name = name.replace(/[\[\]]/g, "\\$&");
+				var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+					results = regex.exec(url);
+				if (!results) return null;
+				if (!results[2]) return '';
+				return decodeURIComponent(results[2].replace(/\+/g, " "));
+			}
+		
+			
+			function getCookie(cname) {
+				var name = cname + "=";
+				var decodedCookie = decodeURIComponent(document.cookie);
+				var ca = decodedCookie.split(';');
+				for(var i = 0; i <ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0) == ' ') {
+						c = c.substring(1);
+					}
+					if (c.indexOf(name) == 0) {
+						return c.substring(name.length, c.length);
+					}
+				}
+				return "";
+			}
+		
+		
+		
+		
+		
+		
+		
+			window.onload = function(e)
+			{ 
+				id =getParameterByName("id");
+				var ourRequest = new XMLHttpRequest();
+                ourRequest.open('GET', 'http://localhost:8080/polls/' + id);
+                ourRequest.onload = function() {
+                    parsed = JSON.parse(ourRequest.responseText);
+                    html = "";
+					html += "<h1>" + parsed["name"] + "</h1>";
+					html += "<h2>" + parsed["description"] + "</h2>";
+					questions = parsed["questions"];
+					for (q in questions)
+					{
+						html += questions[q].question;
+						html += "<div class=\"form-group\"><label for=\"ans"  + q +  "\">Odpowiedz</label> <input class=\"form-control\" id=\"ans" + q + "\" name=\"answer" + q +"\" type=\"text\"/></div>"
+					}
+					html += "<p><input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Send\"></p>";
+					document.getElementById('output').innerHTML = html;
+                }
+                ourRequest.send();
+			}
+			
+			function formToObject(form) {
+				var obj = {};
+				var elements = form.querySelectorAll("input, select, textarea");
+				for (var i = 0; i < elements.length; ++i) {
+					var element = elements[i];
+					var name = element.name;
+					var value = element.value;
+					if (name) {
+						obj[name] = value;
+					}
+				}
+				return obj;
+			}
+		
+			function formToObject(form) {
+				var obj = {};
+				var elements = form.querySelectorAll("input, select, textarea");
+				for (var i = 0; i < elements.length; ++i) {
+					var element = elements[i];
+					var name = element.name;
+					var value = element.value;
+					if (name) {
+						obj[name] = value;
+					}
+				}
+				return JSON.parse(JSON.stringify(obj));
+			}
+			
+			
+			function sendPost(json)
+			{
+				var request = new XMLHttpRequest(json);
+				request.open('POST', 'http://localhost:8080/polls', true);
+				request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+				request.send(json);
+				document.getElementById('output').innerHTML = "Wyslano<p></p>Dziekujemy!";
+			}
+		
+		
+			document.addEventListener("DOMContentLoaded", function() {
+				var form = document.getElementById("pollForm");
+				form.addEventListener("submit", function(e) {
+					e.preventDefault();
+					ObjectForm = formToObject(form);
+					keys = Object.values(ObjectForm);
+					i=0;
+					parsed["userID"] = getCookie('token');
+					for (q in parsed["questions"])
+					{
+						parsed["questions"][q].answers = parsed["questions"][q].answers.slice(0, 1);
+						parsed["questions"][q].answers[0].name = keys[i];
+						parsed["questions"][q].answers[0].voteQuantity = 1;
+						i++;
+					}
+					sendPost(JSON.stringify(parsed));
+					
+					
+				}, false);
+			});
+            
+        </script>
+
+		<p>Wypelniasz wlasnie ankiete:</p>
+		<form action="#" id="pollForm" method="post">
+        <pre id="output"></pre>
+		</form>
+		<pre id="lel"></pre>
+        <div class="dottedline"></div>
+</div>
+
+    <div id="footer">
+        Projekt przygotowywany na zajêcia TAS 2016 &copy; Wszelkie prawa zastrze¿one
+    </div>
+
+</div>
+
+</body>
+</html>

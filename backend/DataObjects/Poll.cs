@@ -9,7 +9,7 @@ namespace backend.DataObjects
 {
     class Poll
     {
-        public Poll(uint id, string name, string description, List<Question> questions, List<Tag> tags, int userID)
+        public Poll(uint id, string name, string description, List<Question> questions, List<Tag> tags, string userID)
         {
             this.id = id;
             this.name = name;
@@ -34,7 +34,7 @@ namespace backend.DataObjects
         public uint id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
-        public int userID { get; set; }
+        public string userID { get; set; }
         public List<Question> questions { get; set; }
         public List<Tag> tags { get; set; }
     }

@@ -27,7 +27,7 @@ namespace backend.DAOs
             string comm = "insert into FilledPolls (userID, pollID) values ";
             comm += "(" + userID + ", " + pollID + ")";
             SendToDatabase(comm);
-            return ReceiveFromDatabase("select ID from FilledPolls where userID = " + userID + " AND pollID = " +pollID)[0];
+            return ReceiveFromDatabase("select ID from FilledPolls where userID = " + userID + " AND pollID = " +pollID + " order by ID desc")[0];
         }
     }
 }

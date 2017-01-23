@@ -70,6 +70,7 @@
     <Compile Include="DAOs\TagsDAO.cs" />
     <Compile Include="DAOs\UsersDAO.cs" />
     <Compile Include="DataObjects\Answer.cs" />
+    <Compile Include="DataObjects\LoginKeeper.cs" />
     <Compile Include="DataObjects\Question.cs" />
     <Compile Include="DataObjects\User.cs" />
     <Compile Include="DataObjects\Poll.cs" />

@@ -32,6 +32,10 @@ namespace backend.ObjectsFactories
         {
             return new HTTPResponse("No content", 204);
         }
+        public HTTPResponse CreateCodeNotAuthorised()
+        {
+            return new HTTPResponse("Not authorized", 203);
+        }
         //4XX
         public HTTPResponse CreateCodeBadRequest()
         {

@@ -23,7 +23,14 @@ namespace backend.UtilityClasses
         {
             FilledAnswersDAO answersDAO = new FilledAnswersDAO();
             NewFilledPollDAO newFilledPollDAO = new NewFilledPollDAO();
-            uint fillID = newFilledPollDAO.CreateNewFilledPoll((uint)poll.userID, poll.id);
+
+            int intUserId = LoginKeeper.Instance.SearchIDByToken(poll.userID);
+            if (intUserId == -1)
+            {
+                ObjectsFactories.HTTPResponseFactory.GetObject().CreateCodeUnauthorized();
+                return "FAILED, User not authorized";
+            }
+            uint fillID = newFilledPollDAO.CreateNewFilledPoll((uint)intUserId, poll.id);
             foreach (Question question in poll.questions)
             {
                 answersDAO.SaveAllFilledAnswersToQuestion(fillID, question.id, question.answers);
