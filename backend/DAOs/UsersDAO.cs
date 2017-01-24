@@ -33,7 +33,7 @@ namespace backend.DAOs
             {
                 comm += "('" + user.firstName + "', '" + user.lastName +
                     "', '" + user.email + "', '" + DataObjects.LoginKeeper.sha256(user.password) + "', '" +
-                    user.sex + "', DEFAULT),";
+                    user.sex + "', 0),";
             }
             comm = comm.Remove(comm.Length - 1);
             return SendToDatabase(comm);

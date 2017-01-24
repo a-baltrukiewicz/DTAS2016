@@ -77,6 +77,10 @@
 				var ourRequest = new XMLHttpRequest();
                 ourRequest.open('GET', 'http://localhost:8080/polls/' + id);
                 ourRequest.onload = function() {
+					if (getCookie('token').length < 35)
+					{
+						alert("Jestes niezalogowany! Zaloguj sie, zeby moc wypelniac ankiety.")
+					}
                     parsed = JSON.parse(ourRequest.responseText);
                     html = "";
 					html += "<h1>" + parsed["name"] + "</h1>";
@@ -87,7 +91,10 @@
 						html += questions[q].question;
 						html += "<div class=\"form-group\"><label for=\"ans"  + q +  "\">Odpowiedz</label> <input class=\"form-control\" id=\"ans" + q + "\" name=\"answer" + q +"\" type=\"text\"/></div>"
 					}
-					html += "<p><input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Send\"></p>";
+					if (getCookie('token').length > 35)
+					{
+						html += "<p><input class=\"btn btn-primary btn-block\" type=\"submit\" value=\"Send\"></p>";
+					}
 					document.getElementById('output').innerHTML = html;
                 }
                 ourRequest.send();
