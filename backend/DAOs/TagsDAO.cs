@@ -47,5 +47,17 @@ namespace backend.DAOs
         {
             return ReceiveFromDatabase("select * from tags");
         }
+
+        public int ConnectTagsWithPoll(uint pollID, List<Tag> tags)
+        {
+            string comm = "insert into TagsTable (PollID, TagID) values ";
+            foreach (var tag in tags)
+            {
+                comm += "\n(" + pollID + ", " + tag.id + "),";
+            }
+            comm = comm.Remove(comm.Length - 1);
+            SendToDatabase(comm);
+            return 0;
+        }
     }
 }

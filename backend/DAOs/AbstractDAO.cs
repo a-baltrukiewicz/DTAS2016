@@ -34,6 +34,7 @@ namespace backend.DAOs
             if (result == null) return null;
             return result;
         }
+
         private static readonly List<string> sqlInjectionCommands = new List<string>{"select", "delete", "drop", "update", "insert" };
         protected bool CheckForSQLInjection(string sql)
         {

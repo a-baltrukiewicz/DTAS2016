@@ -68,6 +68,8 @@
     <Compile Include="DAOs\FilledQuestionsDAO.cs" />
     <Compile Include="DAOs\NewFilledPollDAO.cs" />
     <Compile Include="DAOs\TagsDAO.cs" />
+    <Compile Include="DAOs\TemplatePollsDAO.cs" />
+    <Compile Include="DAOs\TemplateQuestionsDAO.cs" />
     <Compile Include="DAOs\UsersDAO.cs" />
     <Compile Include="DataObjects\Answer.cs" />
     <Compile Include="DataObjects\LoginKeeper.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="HTTPServer\HTTPServer.cs" />
     <Compile Include="HTTPServer\RequestHandlers\AbstractRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\LoginRequestHandler.cs" />
+    <Compile Include="HTTPServer\RequestHandlers\TemplatePollsRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\TagsRequestHandler.cs" />
     <Compile Include="HTTPServer\RequestHandlers\UsersRequestHandler.cs" />
     <Compile Include="DAOs\AbstractDAO.cs" />
@@ -92,6 +95,7 @@
     <Compile Include="ServerDefines.cs" />
     <Compile Include="UtilityClasses\HTTPResponse.cs" />
     <Compile Include="UtilityClasses\RESTCollectionElementID.cs" />
+    <Compile Include="UtilityClasses\TemplatePollSaver.cs" />
     <Compile Include="UtilityClasses\UserFilledAnswersSaver.cs" />
   </ItemGroup>
   <ItemGroup>
