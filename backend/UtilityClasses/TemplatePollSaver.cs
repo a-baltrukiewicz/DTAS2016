@@ -26,7 +26,8 @@ namespace backend.UtilityClasses
             TemplateQuestionsDAO templateQuestionsDAO = new TemplateQuestionsDAO();
 
             uint pollID = templatePollsDAO.SaveTemplatePoll(poll);
-            tagsDAO.ConnectTagsWithPoll(pollID, poll.tags);
+            if (poll.tags != null)
+                tagsDAO.ConnectTagsWithPoll(pollID, poll.tags);
 
             templateQuestionsDAO.SaveQuestions(pollID, poll.questions);
 
