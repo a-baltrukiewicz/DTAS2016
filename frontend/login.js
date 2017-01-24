@@ -27,7 +27,15 @@
 		request.onload=function(){
 			var y=JSON.parse(request.responseText);
 			setCookie('token', y, 1);
-			alert(getCookie('token'));
+			if (getCookie('token').length > 35)
+			{
+				var email = document.getElementById("loginForm").email.value;
+				alert ('Zalogowano jako: ' + email)
+			}
+			else
+			{
+				alert("Błędne dane! Spróbuj ponownie!");
+			}
 		}
 		sleep(10000).then(() => {
 			document.getElementById('output').innerHTML = '';
